@@ -35,6 +35,8 @@ builder.Services.AddAuthentication(option =>
 });
 builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddTransient<IAccountRepository, AccountRepository>();
+builder.Services.AddTransient<IComputerRespository, ComputerRepository>();
+builder.Services.AddAutoMapper(typeof(Program));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

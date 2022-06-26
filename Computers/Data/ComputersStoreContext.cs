@@ -8,5 +8,7 @@ namespace Computers.Data
         public ComputersStoreContext(DbContextOptions<ComputersStoreContext> options):base(options)
         { 
         }
+
+        public DbSet<Computer> Computers { get; set; }
     }
 }
