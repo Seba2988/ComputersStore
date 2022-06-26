@@ -2,12 +2,10 @@
 namespace Computers.Data
 {
     public class Computer
-    {
-        [Key]
+    { 
         public int Id { get; set; }
 
         //[Required]
-        [Key]
         public string Model { get; set; }
 
         //[Required]

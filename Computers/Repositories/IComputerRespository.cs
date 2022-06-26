@@ -11,5 +11,7 @@ namespace Computers.Repositories
         Task UpdateComputerAsync(int computerId, ComputerModel computer);
         Task UpdateComputerPatchAsync(int computerId, JsonPatchDocument computer);
         Task DeleteComputerAsync(int computerId);
+
+        Task<List<ComputerModel>> GetComputersByCriteria(SearchModel searchModel);
     }
 }

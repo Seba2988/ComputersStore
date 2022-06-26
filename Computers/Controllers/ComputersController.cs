@@ -9,6 +9,7 @@ namespace Computers.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ComputersController : ControllerBase
     {
         private readonly IComputerRespository _computerRespository;
@@ -39,6 +40,34 @@ namespace Computers.Controllers
         {
             var newComputerId =  await _computerRespository.AddComputerAsync(computerModel);
             return CreatedAtAction(nameof(GetComputerById), new {id=newComputerId, controller="computers"}, newComputerId);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateComputer([FromBody] ComputerModel computerModel, [FromRoute] int id)
+        {
+            await _computerRespository.UpdateComputerAsync(id, computerModel);
+            return Ok();
+        }
+
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> PatchComputer([FromBody] JsonPatchDocument computerModel, [FromRoute] int id)
+        {
+            await _computerRespository.UpdateComputerPatchAsync(id, computerModel);
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteComputer([FromRoute] int id)
+        { 
+            await _computerRespository.DeleteComputerAsync(id);
+            return Ok();
+        }
+
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchComputers([FromQuery] SearchModel searchModel)
+        {
+            var results = await _computerRespository.GetComputersByCriteria(searchModel);
+            return Ok(results);
         }
 
     }
